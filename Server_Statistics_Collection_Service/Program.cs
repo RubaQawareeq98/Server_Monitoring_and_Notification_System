@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Server_Statistics_Collection_Service.Configurations;
-using Server_Statistics_Collection_Service.Services;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using Server_Statistics_Collection_Service.Factories;
+using Server_Statistics_Collection_Service.Factories.Interfaces;
+using Server_Statistics_Collection_Service.Strategies;
 
 namespace Server_Statistics_Collection_Service;
 
@@ -14,15 +15,18 @@ class Program
             .Build();
         
         var settings = configuration.GetSection("ServerStatisticsConfig").Get<ServerStatisticsConfig>();
-        IServerStatisticsCollector collector = new ServerStatisticsCollector();
-        var availableMemory = collector.GetAvailableMemory();
-        var usedMemory = collector.GetMemoryUsage();
-        var usageCpu = collector.GetCpuUsage();
-        var time = collector.GetTimestamp();
+      
+        IServerStatisticsCollectorFactory factory = new ServerStatisticsCollectorFactory();
+        var statistic = factory._serverStatisticsCollector(PlatformID.Unix);
+        Console.WriteLine("statistic");
+         var availableMemory = statistic.GetAvailableMemory();
+         var usedMemory = statistic.GetMemoryUsage();
+         var usageCpu = statistic.GetCpuUsage();
+         var time = statistic.GetTimestamp();
         Console.WriteLine($"Available Memory: {availableMemory}");
         Console.WriteLine($"Used Memory: {usedMemory}");
         Console.WriteLine($"Usage Cpu: {usageCpu}");
         Console.WriteLine($"Time: {time}");
-        
+
     }
 }

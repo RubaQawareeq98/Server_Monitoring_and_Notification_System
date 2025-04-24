@@ -1,9 +1,10 @@
-using Server_Statistics_Collection_Service.Services.Interfaces;
 using System.Diagnostics;
 using System.Management;
-namespace Server_Statistics_Collection_Service.Services;
+using Server_Statistics_Collection_Service.Strategies.Interfaces;
 
-public class ServerStatisticsCollector : IServerStatisticsCollector
+namespace Server_Statistics_Collection_Service.Strategies;
+
+public class WindowsServerStatisticsCollector : IServerStatisticsCollector
 {
     public double GetAvailableMemory()
     {
