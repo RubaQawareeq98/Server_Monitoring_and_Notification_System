@@ -20,8 +20,8 @@ public class ServerStatisticsCollector : IServerStatisticsCollector
     
         foreach (var obj in totalSearcher.Get())
         {
-            var totalPhysicalMemory = (double)obj["TotalPhysicalMemory"];
-            totalMemory += totalPhysicalMemory / (1024 * 1024);
+            var totalPhysicalMemory = (ulong)obj["TotalPhysicalMemory"];
+            totalMemory += totalPhysicalMemory / (1024.0 * 1024.0);
         }
         
         var freeMemory = GetAvailableMemory();
