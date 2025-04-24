@@ -1,4 +1,4 @@
-namespace Server_Statistics_Collection_Service;
+namespace Server_Statistics_Collection_Service.Models;
 
 public class ServerStatistics
 {
