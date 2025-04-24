@@ -1,26 +1,44 @@
 using Server_Statistics_Collection_Service.Services.Interfaces;
-
+using System.Diagnostics;
+using System.Management;
 namespace Server_Statistics_Collection_Service.Services;
 
 public class ServerStatisticsCollector : IServerStatisticsCollector
 {
+    public double GetAvailableMemory()
+    {
+        var availableMemoryCounter = new PerformanceCounter("Memory", "Available MBytes");
+        
+        return availableMemoryCounter.NextValue();
+    }
+    
     public double GetMemoryUsage()
     {
-        throw new NotImplementedException();
+        var totalQuery = new ObjectQuery("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
+        var totalSearcher = new ManagementObjectSearcher(totalQuery);
+        double totalMemory = 0;
+    
+        foreach (var obj in totalSearcher.Get())
+        {
+            var totalPhysicalMemory = (double)obj["TotalPhysicalMemory"];
+            totalMemory += totalPhysicalMemory / (1024 * 1024);
+        }
+        
+        var freeMemory = GetAvailableMemory();
+        var usedMemory = totalMemory - freeMemory;
+        return usedMemory;
     }
 
     public double GetCpuUsage()
     {
-        throw new NotImplementedException();
-    }
-
-    public double GetAvailableMemory()
-    {
-        throw new NotImplementedException();
+        var cpuUsageCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        cpuUsageCounter.NextValue();
+        Thread.Sleep(1000);
+        return cpuUsageCounter.NextValue();
     }
 
     public DateTime GetTimestamp()
     {
-        throw new NotImplementedException();
+        return DateTime.UtcNow;
     }
 }
