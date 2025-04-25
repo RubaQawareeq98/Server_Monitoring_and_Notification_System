@@ -1,4 +1,4 @@
-namespace Server_Statistics_Collection_Service.Strategies.Interfaces;
+namespace Server_Statistics_Collection_Service.Services.Interfaces;
 
 public interface IServerStatisticsCollector
 {
