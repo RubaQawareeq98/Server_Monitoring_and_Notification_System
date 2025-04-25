@@ -13,13 +13,8 @@ public class RabbitMqMessagePublisher(string hostName, string serverIdentifier) 
     {
         await using var connection = await _factory.CreateConnectionAsync();
         await using var channel = await connection.CreateChannelAsync();
-        
-        var basicProperties = new BasicProperties
-        {
-            Persistent = true,  
-            MessageId = Guid.NewGuid().ToString(),
-            Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds())
-        };
+
+        var basicProperties = new BasicProperties();
         
         var body = Encoding.UTF8.GetBytes(message);
 
