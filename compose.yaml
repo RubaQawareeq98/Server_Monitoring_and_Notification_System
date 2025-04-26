@@ -1,6 +1,0 @@
-﻿services:
-  server_statistics_collection_service:
-    image: server_statistics_collection_service
-    build:
-      context: .
-      dockerfile: Server_Statistics_Collection_Service/dockerfile
