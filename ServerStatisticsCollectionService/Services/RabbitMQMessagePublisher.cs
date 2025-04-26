@@ -5,9 +5,9 @@ using ServerStatisticsCollectionService.Services.Interfaces;
 
 namespace ServerStatisticsCollectionService.Services;
 
-public class RabbitMqMessagePublisher(RabbitMqConfig config, ServerStatisticsConfig statisticsConfig) : IMessagePublisher
+public class RabbitMqMessagePublisher(RabbitMqConfig rabbitMqConfig, ServerStatisticsConfig statisticsConfig) : IMessagePublisher
 {
-    private readonly IConnectionFactory _factory = new ConnectionFactory { HostName = config.HostName, UserName = config.UserName, Password = config.Password};
+    private readonly IConnectionFactory _factory = new ConnectionFactory { HostName = rabbitMqConfig.HostName, UserName = rabbitMqConfig.UserName, Password = rabbitMqConfig.Password};
     private readonly string _topic = $"ServerStatistics.{statisticsConfig.ServerIdentifier}";
 
     public async Task Publish(string message)
@@ -18,9 +18,15 @@ public class RabbitMqMessagePublisher(RabbitMqConfig config, ServerStatisticsCon
         var basicProperties = new BasicProperties();
 
         var body = Encoding.UTF8.GetBytes(message);
-
+        
+        await channel.ExchangeDeclareAsync(
+            exchange: rabbitMqConfig.Exchange,
+            type: ExchangeType.Topic,
+            durable: true
+        );
+        
         await channel.BasicPublishAsync(
-            exchange: string.Empty,   
+            exchange: rabbitMqConfig.Exchange,   
             routingKey: _topic,   
             mandatory: true,       
             basicProperties: basicProperties,
