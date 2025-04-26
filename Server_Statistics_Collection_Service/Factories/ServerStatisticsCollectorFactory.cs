@@ -6,7 +6,7 @@ namespace Server_Statistics_Collection_Service.Factories;
 
 public class ServerStatisticsCollectorFactory : IServerStatisticsCollectorFactory
 {
-    public IServerStatisticsCollector _serverStatisticsCollector(PlatformID platform)
+    public IServerStatisticsCollector GetServerStatisticsCollector(PlatformID platform)
     {
         return platform switch
         {
