@@ -16,12 +16,6 @@ public static class AddServicesDependency
     {
         var serverStatisticsConfig = configuration.GetSection("ServerStatisticsConfig").Get<ServerStatisticsConfig>();
         var rabbitMqConfig = configuration.GetSection("RabbitMQConfig").Get<RabbitMqConfig>();
-
-        if (serverStatisticsConfig is null || rabbitMqConfig is null)
-        {
-            Console.WriteLine("No server statistics config found.");
-            return;
-        }
         
         services.AddSingleton(serverStatisticsConfig);
         services.AddSingleton(rabbitMqConfig);

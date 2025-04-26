@@ -9,16 +9,17 @@ internal abstract class Program
 {
     static async Task Main()
     {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
-        var service = new ServiceCollection();
-        
-        service.AddServices(configuration);
-        var provider = service.BuildServiceProvider();
         try
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var service = new ServiceCollection();
+            
+            service.AddServices(configuration);
+            var provider = service.BuildServiceProvider();
+        
             var publisher = provider.GetService<IServerStatisticsPublisher>();
         
             await publisher?.RunAsync();
