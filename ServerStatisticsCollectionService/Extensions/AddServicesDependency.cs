@@ -1,9 +1,9 @@
+using Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServerStatisticsCollectionService.Configurations;
 using ServerStatisticsCollectionService.Factories;
 using ServerStatisticsCollectionService.Factories.Interfaces;
-using ServerStatisticsCollectionService.Models;
 using ServerStatisticsCollectionService.Serializers;
 using ServerStatisticsCollectionService.Services;
 using ServerStatisticsCollectionService.Services.Interfaces;

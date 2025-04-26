@@ -1,5 +1,5 @@
+using Domain;
 using ServerStatisticsCollectionService.Configurations;
-using ServerStatisticsCollectionService.Models;
 using ServerStatisticsCollectionService.Serializers;
 using ServerStatisticsCollectionService.Services.Interfaces;
 

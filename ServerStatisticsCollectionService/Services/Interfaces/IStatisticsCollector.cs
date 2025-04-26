@@ -1,4 +1,5 @@
-using ServerStatisticsCollectionService.Models;
+
+using Domain;
 
 namespace ServerStatisticsCollectionService.Services.Interfaces;
 
