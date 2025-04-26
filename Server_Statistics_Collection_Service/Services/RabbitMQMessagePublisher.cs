@@ -5,10 +5,10 @@ using Server_Statistics_Collection_Service.Configurations;
 
 namespace Server_Statistics_Collection_Service.Services;
 
-public class RabbitMqMessagePublisher(RabbitMqConfig config, string serverIdentifier) : IMessagePublisher
+public class RabbitMqMessagePublisher(RabbitMqConfig config, ServerStatisticsConfig statisticsConfig) : IMessagePublisher
 {
     private readonly IConnectionFactory _factory = new ConnectionFactory { HostName = config.HostName, UserName = config.UserName, Password = config.Password};
-    private readonly string _topic = $"Server {serverIdentifier} is running";
+    private readonly string _topic = $"ServerStatistics.{statisticsConfig.ServerIdentifier}";
 
     public async Task Publish(string message)
     {
