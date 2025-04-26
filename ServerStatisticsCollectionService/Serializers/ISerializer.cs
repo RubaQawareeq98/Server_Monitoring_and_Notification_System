@@ -1,4 +1,4 @@
-namespace Server_Statistics_Collection_Service.Serializers;
+namespace ServerStatisticsCollectionService.Serializers;
 
 public interface ISerializer<in T>
 {

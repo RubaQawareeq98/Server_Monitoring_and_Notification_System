@@ -1,9 +1,9 @@
 using System.Text;
-using Server_Statistics_Collection_Service.Services.Interfaces;
 using RabbitMQ.Client;
-using Server_Statistics_Collection_Service.Configurations;
+using ServerStatisticsCollectionService.Configurations;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Services;
+namespace ServerStatisticsCollectionService.Services;
 
 public class RabbitMqMessagePublisher(RabbitMqConfig config, ServerStatisticsConfig statisticsConfig) : IMessagePublisher
 {

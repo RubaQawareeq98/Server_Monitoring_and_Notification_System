@@ -1,6 +1,6 @@
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Factories.Interfaces;
+namespace ServerStatisticsCollectionService.Factories.Interfaces;
 
 public interface IServerStatisticsCollectorFactory
 {

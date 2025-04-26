@@ -1,7 +1,7 @@
-using Server_Statistics_Collection_Service.Models;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Models;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Services;
+namespace ServerStatisticsCollectionService.Services;
 
 public class StatisticsCollector (IServerStatisticsCollector collector) : IStatisticsCollector
 {

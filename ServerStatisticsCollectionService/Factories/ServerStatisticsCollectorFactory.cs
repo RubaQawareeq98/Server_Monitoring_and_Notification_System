@@ -1,8 +1,8 @@
-using Server_Statistics_Collection_Service.Factories.Interfaces;
-using Server_Statistics_Collection_Service.Services.Interfaces;
-using Server_Statistics_Collection_Service.Strategies;
+using ServerStatisticsCollectionService.Factories.Interfaces;
+using ServerStatisticsCollectionService.Services.Interfaces;
+using ServerStatisticsCollectionService.Strategies;
 
-namespace Server_Statistics_Collection_Service.Factories;
+namespace ServerStatisticsCollectionService.Factories;
 
 public class ServerStatisticsCollectorFactory : IServerStatisticsCollectorFactory
 {

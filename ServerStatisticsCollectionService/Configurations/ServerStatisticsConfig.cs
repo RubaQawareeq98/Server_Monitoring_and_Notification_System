@@ -1,4 +1,4 @@
-namespace Server_Statistics_Collection_Service.Configurations;
+namespace ServerStatisticsCollectionService.Configurations;
 
 public class ServerStatisticsConfig
 {

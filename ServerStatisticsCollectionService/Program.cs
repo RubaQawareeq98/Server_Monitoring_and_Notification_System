@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Server_Statistics_Collection_Service.Extensions;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Extensions;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service;
+namespace ServerStatisticsCollectionService;
 
 internal abstract class Program
 {

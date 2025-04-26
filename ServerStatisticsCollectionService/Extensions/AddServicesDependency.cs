@@ -1,14 +1,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Server_Statistics_Collection_Service.Configurations;
-using Server_Statistics_Collection_Service.Factories;
-using Server_Statistics_Collection_Service.Factories.Interfaces;
-using Server_Statistics_Collection_Service.Models;
-using Server_Statistics_Collection_Service.Serializers;
-using Server_Statistics_Collection_Service.Services;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Configurations;
+using ServerStatisticsCollectionService.Factories;
+using ServerStatisticsCollectionService.Factories.Interfaces;
+using ServerStatisticsCollectionService.Models;
+using ServerStatisticsCollectionService.Serializers;
+using ServerStatisticsCollectionService.Services;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Extensions;
+namespace ServerStatisticsCollectionService.Extensions;
 
 public static class AddServicesDependency
 {

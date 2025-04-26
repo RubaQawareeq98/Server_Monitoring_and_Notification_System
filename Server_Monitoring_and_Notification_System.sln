@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server_Monitoring_and_Notification_System", "Server_Monitoring_and_Notification_System\Server_Monitoring_and_Notification_System.csproj", "{752D090D-A899-4351-BFC8-68BEDDE62FF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMonitoringAndNotificationSystem", "ServerMonitoringAndNotificationSystem\ServerMonitoringAndNotificationSystem.csproj", "{752D090D-A899-4351-BFC8-68BEDDE62FF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server_Statistics_Collection_Service", "Server_Statistics_Collection_Service\Server_Statistics_Collection_Service.csproj", "{9A4A3C8B-FE4C-4514-B0C9-4E5C8CE391FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerStatisticsCollectionService", "ServerStatisticsCollectionService\ServerStatisticsCollectionService.csproj", "{9A4A3C8B-FE4C-4514-B0C9-4E5C8CE391FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

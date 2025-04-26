@@ -1,9 +1,9 @@
-using Server_Statistics_Collection_Service.Configurations;
-using Server_Statistics_Collection_Service.Models;
-using Server_Statistics_Collection_Service.Serializers;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Configurations;
+using ServerStatisticsCollectionService.Models;
+using ServerStatisticsCollectionService.Serializers;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Services;
+namespace ServerStatisticsCollectionService.Services;
 
 public class ServerStatisticsPublisher (
     IStatisticsCollector collector,

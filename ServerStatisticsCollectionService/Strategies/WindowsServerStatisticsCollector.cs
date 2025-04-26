@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Management;
-using Server_Statistics_Collection_Service.Services.Interfaces;
+using ServerStatisticsCollectionService.Services.Interfaces;
 
-namespace Server_Statistics_Collection_Service.Strategies;
+namespace ServerStatisticsCollectionService.Strategies;
 
 public class WindowsServerStatisticsCollector : IServerStatisticsCollector
 {
