@@ -7,4 +7,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.0-preview.3.25172.1" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="10.0.0-preview.3.25172.1" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
+    </ItemGroup>
+
 </Project>
