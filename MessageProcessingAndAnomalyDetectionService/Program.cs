@@ -1,4 +1,5 @@
 ﻿using MessageProcessingAndAnomalyDetectionService.Configurations;
+using MessageProcessingAndAnomalyDetectionService.Repositories;
 using MessageProcessingAndAnomalyDetectionService.Services;
 using MessageProcessingAndAnomalyDetectionService.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +17,10 @@ class Program
         
         var rabbitMqConfig = configuration.GetSection("RabbitMQConfig").Get<RabbitMqConfig>();
         IRabbitMqMessageConsumer mqMessageConsumer = new RabbitMqMessageConsumer(rabbitMqConfig);
-        await mqMessageConsumer.ConsumeMessage();
+        IMessageProcessingAndAnomalyDetectionService processingAndAnomalyDetectionService = new Services.MessageProcessingAndAnomalyDetectionService(mqMessageConsumer);
+        await processingAndAnomalyDetectionService.RunAsync();
+        var mongo = new MongodbServerCollection(configuration);
+        var db = mongo.GetCollection();
 
     }
 }
