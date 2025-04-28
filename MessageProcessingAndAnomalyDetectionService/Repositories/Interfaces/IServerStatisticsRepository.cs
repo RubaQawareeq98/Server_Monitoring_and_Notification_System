@@ -5,4 +5,5 @@ namespace MessageProcessingAndAnomalyDetectionService.Repositories.Interfaces;
 public interface IServerStatisticsRepository
 {
     Task InsertServerStatisticsAsync(SeverStatisticsResponse serverStatistics);
+    Task<SeverStatisticsResponse> GetPreviousStatisticAsync(string serverIdentifier);
 }

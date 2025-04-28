@@ -13,4 +13,14 @@ public class ServerStatisticsRepository (IMongoDatabase database, MongoDbConfig 
     {
         await _statisticsCollection.InsertOneAsync(serverStatistics);
     }
+
+    public async Task<SeverStatisticsResponse> GetPreviousStatisticAsync(string serverIdentifier)
+    {
+        var serverStatistics = await _statisticsCollection
+            .Find(s => s.ServerIdentifier == serverIdentifier)
+            .SortByDescending(s => s.Timestamp)
+            .FirstOrDefaultAsync();
+        
+        return serverStatistics;
+    }
 }
