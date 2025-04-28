@@ -18,9 +18,9 @@ public class ServerStatisticsRepository (IMongoDatabase database, MongoDbConfig 
     {
         var serverStatistics = await _statisticsCollection
             .Find(s => s.ServerIdentifier == serverIdentifier)
+            .Project<ServerStatisticsResponse>(Builders<ServerStatisticsResponse>.Projection.Exclude("_id"))
             .SortByDescending(s => s.Timestamp)
             .FirstOrDefaultAsync();
-        
         return serverStatistics;
     }
 }
