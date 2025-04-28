@@ -2,11 +2,14 @@ using MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interfaces;
 using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Models;
 using MessageProcessingAndAnomalyDetectionService.Models.Enums;
+using Microsoft.Extensions.Options;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
-public class CpuAnomalyChecker (AnomalyDetectionConfig config) : IAnomalyChecker
+public class CpuAnomalyChecker (IOptions<AnomalyDetectionConfig> options) : IAnomalyChecker
 {
+    private readonly AnomalyDetectionConfig _config = options.Value; 
+    
     public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
     {
         if (previousSeverStatistics is null)
@@ -15,7 +18,7 @@ public class CpuAnomalyChecker (AnomalyDetectionConfig config) : IAnomalyChecker
         }
         
         return serverStatistics.CpuUsage >
-               previousSeverStatistics.CpuUsage * (1 + config.CpuUsageAnomalyThresholdPercentage);
+               previousSeverStatistics.CpuUsage * (1 + _config.CpuUsageAnomalyThresholdPercentage);
     }
 
     public Alert GetAlert()

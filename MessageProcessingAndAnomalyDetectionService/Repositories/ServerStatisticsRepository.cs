@@ -1,13 +1,20 @@
 using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Models;
 using MessageProcessingAndAnomalyDetectionService.Repositories.Interfaces;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace MessageProcessingAndAnomalyDetectionService.Repositories;
 
-public class ServerStatisticsRepository (IMongoDatabase database, MongoDbConfig mongoDbConfig) : IServerStatisticsRepository
+public class ServerStatisticsRepository : IServerStatisticsRepository
 {
-    private readonly IMongoCollection<ServerStatisticsResponse> _statisticsCollection = database.GetCollection<ServerStatisticsResponse>(mongoDbConfig.CollectionName);
+    private readonly IMongoCollection<ServerStatisticsResponse> _statisticsCollection;
+    
+    public ServerStatisticsRepository(IMongoDatabase database, IOptions<MongoDbConfig> options)
+    {
+        var mongoDbConfig = options.Value;
+        _statisticsCollection = database.GetCollection<ServerStatisticsResponse>(mongoDbConfig.CollectionName);
+    }
     
     public async Task InsertServerStatisticsAsync(ServerStatisticsResponse serverStatistics)
     {

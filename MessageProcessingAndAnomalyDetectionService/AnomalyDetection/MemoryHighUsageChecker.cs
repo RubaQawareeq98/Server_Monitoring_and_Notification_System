@@ -2,15 +2,18 @@ using MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interfaces;
 using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Models;
 using MessageProcessingAndAnomalyDetectionService.Models.Enums;
+using Microsoft.Extensions.Options;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
-public class MemoryHighUsageChecker (AnomalyDetectionConfig config): IAnomalyChecker
+public class MemoryHighUsageChecker (IOptions<AnomalyDetectionConfig> options): IAnomalyChecker
 {
+    private readonly AnomalyDetectionConfig _config = options.Value; 
+
     public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
     {
         return serverStatistics.MemoryUsage / (serverStatistics.MemoryUsage + serverStatistics.AvailableMemory) >
-               config.MemoryUsageThresholdPercentage;
+               _config.MemoryUsageThresholdPercentage;
     }
 
     public Alert GetAlert()

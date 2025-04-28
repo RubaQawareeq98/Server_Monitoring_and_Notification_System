@@ -4,7 +4,7 @@ using MessageProcessingAndAnomalyDetectionService.Repositories.Interfaces;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
-public class AnomalyDetector (IServerStatisticsRepository repository, IList<IAnomalyChecker> checkers) : IAnomalyDetector
+public class AnomalyDetector (IServerStatisticsRepository repository, IEnumerable<IAnomalyChecker> checkers) : IAnomalyDetector
 {
     private ServerStatisticsResponse? _previousSeverStatistics;
     
