@@ -1,4 +1,5 @@
 using System.Text;
+using Domain.Configurations;
 using RabbitMQ.Client;
 using ServerStatisticsCollectionService.Configurations;
 using ServerStatisticsCollectionService.Factories.Interfaces;

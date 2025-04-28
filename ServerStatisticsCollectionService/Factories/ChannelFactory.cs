@@ -1,5 +1,5 @@
+using Domain.Configurations;
 using RabbitMQ.Client;
-using ServerStatisticsCollectionService.Configurations;
 using ServerStatisticsCollectionService.Factories.Interfaces;
 
 namespace ServerStatisticsCollectionService.Factories;

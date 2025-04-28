@@ -1,4 +1,5 @@
-using Domain;
+using Domain.Configurations;
+using Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServerStatisticsCollectionService.Configurations;
