@@ -27,7 +27,7 @@ public class RabbitMqMessageConsumer(IChannelFactory channelFactory, RabbitMqCon
             queue: rabbitMqConfig.QueueName,
             autoAck: false,
             consumer: consumer);
-
-        await Task.Delay(100);
+        
+        await Task.Delay(Timeout.Infinite);
     }
 }
