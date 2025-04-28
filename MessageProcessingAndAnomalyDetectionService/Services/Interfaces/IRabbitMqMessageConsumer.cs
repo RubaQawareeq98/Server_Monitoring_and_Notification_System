@@ -4,5 +4,6 @@ namespace MessageProcessingAndAnomalyDetectionService.Services.Interfaces;
 
 public interface IRabbitMqMessageConsumer
 {
-    Task ConsumeMessage();
+    Task InitializeAsync();
+    Task ConsumeMessage(AsyncEventHandler<BasicDeliverEventArgs> onMessageReceived);
 }

@@ -1,37 +1,33 @@
-using System.Text;
 using MessageProcessingAndAnomalyDetectionService.Configurations;
-using MessageProcessingAndAnomalyDetectionService.Extensions;
+using MessageProcessingAndAnomalyDetectionService.Factories.Interfaces;
 using MessageProcessingAndAnomalyDetectionService.Services.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace MessageProcessingAndAnomalyDetectionService.Services;
 
-public class RabbitMqMessageConsumer (RabbitMqConfig rabbitMqConfig) : IRabbitMqMessageConsumer
+public class RabbitMqMessageConsumer(IChannelFactory channelFactory, RabbitMqConfig rabbitMqConfig) : IRabbitMqMessageConsumer
 {
-    private readonly IConnectionFactory _factory = new ConnectionFactory { HostName = rabbitMqConfig.HostName, UserName = rabbitMqConfig.UserName, Password = rabbitMqConfig.Password};
-
-    public async Task ConsumeMessage()
+    private IChannel? _channel;
+    
+    public async Task InitializeAsync()
     {
-        await using var connection = await _factory.CreateConnectionAsync();
-        await using var channel = await connection.CreateChannelAsync();
+        _channel = await channelFactory.GetChannel();
+    }
+    
+    public async Task ConsumeMessage(AsyncEventHandler<BasicDeliverEventArgs> onMessageReceived)
+    {
+        ArgumentNullException.ThrowIfNull(_channel);
+        
+        var consumer = new AsyncEventingBasicConsumer(_channel);
 
-        await channel.DeclareAsync(rabbitMqConfig);
+        consumer.ReceivedAsync += onMessageReceived;
 
-        var consumer = new AsyncEventingBasicConsumer(channel);
-
-        consumer.ReceivedAsync += (_, ea) =>
-        {
-                var body = ea.Body.ToArray();
-                var msg = Encoding.UTF8.GetString(body);
-                Console.WriteLine($"[x] Received: {msg}");
-                Console.WriteLine($"args: {ea.RoutingKey}.");
-                return Task.CompletedTask;
-        };
-
-        await channel.BasicConsumeAsync(
+        await _channel.BasicConsumeAsync(
             queue: rabbitMqConfig.QueueName,
             autoAck: false,
             consumer: consumer);
+
+        await Task.Delay(100);
     }
 }
