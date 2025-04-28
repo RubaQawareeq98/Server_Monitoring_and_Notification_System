@@ -13,13 +13,17 @@ public class ServerStatisticsPublisher (
 {
     public async Task RunAsync()
     {
-        for (var i = 0; i < 100; i++)
+        await publisher.InitializeAsync();
+        
+        while (Console.ReadKey().Key != ConsoleKey.Q)
         {
+            Console.WriteLine("Press Q to exit");
             var statistics = collector.CollectServerStatistics();
             var message = serializer.Serialize(statistics);
+            
             await publisher.Publish(message);
 
-            await Task.Delay(config.SamplingIntervalSeconds * 1000);
+           await Task.Delay(config.SamplingIntervalSeconds * 1000);
         }
     }
 }

@@ -1,36 +1,37 @@
 using System.Text;
 using RabbitMQ.Client;
 using ServerStatisticsCollectionService.Configurations;
+using ServerStatisticsCollectionService.Factories.Interfaces;
 using ServerStatisticsCollectionService.Services.Interfaces;
 
 namespace ServerStatisticsCollectionService.Services;
 
-public class RabbitMqMessagePublisher(RabbitMqConfig rabbitMqConfig, ServerStatisticsConfig statisticsConfig) : IMessagePublisher
+public class RabbitMqMessagePublisher(
+    IChannelFactory channelFactory,
+    RabbitMqConfig rabbitMqConfig,
+    ServerStatisticsConfig statisticsConfig) : IMessagePublisher
 {
-    private readonly IConnectionFactory _factory = new ConnectionFactory { HostName = rabbitMqConfig.HostName, UserName = rabbitMqConfig.UserName, Password = rabbitMqConfig.Password};
     private readonly string _topic = $"ServerStatistics.{statisticsConfig.ServerIdentifier}";
+    private IChannel? _channel;
 
+    public async Task InitializeAsync()
+    {
+        _channel = await channelFactory.GetChannel();
+    }
+    
     public async Task Publish(string message)
     {
-        await using var connection = await _factory.CreateConnectionAsync();
-        await using var channel = await connection.CreateChannelAsync();
-
+        ArgumentNullException.ThrowIfNull(_channel);
+        
         var basicProperties = new BasicProperties();
-
         var body = Encoding.UTF8.GetBytes(message);
         
-        await channel.ExchangeDeclareAsync(
-            exchange: rabbitMqConfig.Exchange,
-            type: ExchangeType.Topic,
-            durable: true
-        );
-        
-        await channel.BasicPublishAsync(
+        await _channel.BasicPublishAsync(
             exchange: rabbitMqConfig.Exchange,   
             routingKey: _topic,   
             mandatory: true,       
-            basicProperties: basicProperties,
-            body: body
+            basicProperties,
+            body
         );
     }
 }
