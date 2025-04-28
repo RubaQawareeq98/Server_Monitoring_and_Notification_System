@@ -1,4 +1,5 @@
-﻿using MessageProcessingAndAnomalyDetectionService.Configurations;
+﻿using Domain.Configurations;
+using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Extensions;
 using MessageProcessingAndAnomalyDetectionService.Services.Interfaces;
 using Microsoft.Extensions.Configuration;

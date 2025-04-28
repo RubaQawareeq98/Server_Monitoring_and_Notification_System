@@ -1,4 +1,4 @@
-using MessageProcessingAndAnomalyDetectionService.Configurations;
+using Domain.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Factories.Interfaces;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
