@@ -2,7 +2,7 @@ using Domain.Models;
 
 namespace MessageProcessingAndAnomalyDetectionService.Models;
 
-public class SeverStatisticsResponse : ServerStatistics
+public class ServerStatisticsResponse : ServerStatistics
 {
     public string ServerIdentifier { get; set; } = string.Empty;
 }

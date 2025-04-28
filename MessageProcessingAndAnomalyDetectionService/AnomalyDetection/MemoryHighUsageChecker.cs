@@ -7,7 +7,7 @@ namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
 public class MemoryHighUsageChecker (AnomalyDetectionConfig config): IAnomalyChecker
 {
-    public bool IsAnomalyDetected(SeverStatisticsResponse serverStatistics, SeverStatisticsResponse? previousSeverStatistics)
+    public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
     {
         return serverStatistics.MemoryUsage / (serverStatistics.MemoryUsage + serverStatistics.AvailableMemory) >
                config.MemoryUsageThresholdPercentage;

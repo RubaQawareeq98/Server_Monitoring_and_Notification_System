@@ -7,14 +7,14 @@ namespace MessageProcessingAndAnomalyDetectionService.Repositories;
 
 public class ServerStatisticsRepository (IMongoDatabase database, MongoDbConfig mongoDbConfig) : IServerStatisticsRepository
 {
-    private readonly IMongoCollection<SeverStatisticsResponse> _statisticsCollection = database.GetCollection<SeverStatisticsResponse>(mongoDbConfig.CollectionName);
+    private readonly IMongoCollection<ServerStatisticsResponse> _statisticsCollection = database.GetCollection<ServerStatisticsResponse>(mongoDbConfig.CollectionName);
     
-    public async Task InsertServerStatisticsAsync(SeverStatisticsResponse serverStatistics)
+    public async Task InsertServerStatisticsAsync(ServerStatisticsResponse serverStatistics)
     {
         await _statisticsCollection.InsertOneAsync(serverStatistics);
     }
 
-    public async Task<SeverStatisticsResponse> GetPreviousStatisticAsync(string serverIdentifier)
+    public async Task<ServerStatisticsResponse?> GetPreviousStatisticAsync(string serverIdentifier)
     {
         var serverStatistics = await _statisticsCollection
             .Find(s => s.ServerIdentifier == serverIdentifier)

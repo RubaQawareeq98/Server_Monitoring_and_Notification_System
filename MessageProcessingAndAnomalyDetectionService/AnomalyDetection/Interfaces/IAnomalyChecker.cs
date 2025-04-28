@@ -4,6 +4,6 @@ namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interface
 
 public interface IAnomalyChecker
 {
-    bool IsAnomalyDetected(SeverStatisticsResponse serverStatistics, SeverStatisticsResponse? previousSeverStatistics);
+    bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics);
     Alert GetAlert();
 }

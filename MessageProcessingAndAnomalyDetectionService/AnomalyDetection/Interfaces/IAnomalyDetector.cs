@@ -4,5 +4,5 @@ namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interface
 
 public interface IAnomalyDetector
 {
-    Task<List<Alert>> GetAlerts(SeverStatisticsResponse serverStatistics);
+    Task<List<Alert>> GetAlerts(ServerStatisticsResponse serverStatistics);
 }

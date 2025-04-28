@@ -7,7 +7,7 @@ namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
 public class CpuHighUsageAlert (AnomalyDetectionConfig config) : IAnomalyChecker
 {
-    public bool IsAnomalyDetected(SeverStatisticsResponse serverStatistics, SeverStatisticsResponse? previousSeverStatistics)
+    public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
     {
         return serverStatistics.CpuUsage > config.CpuUsageThresholdPercentage;
     }

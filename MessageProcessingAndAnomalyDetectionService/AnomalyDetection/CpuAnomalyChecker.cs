@@ -7,7 +7,7 @@ namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
 public class CpuAnomalyChecker (AnomalyDetectionConfig config) : IAnomalyChecker
 {
-    public bool IsAnomalyDetected(SeverStatisticsResponse serverStatistics, SeverStatisticsResponse? previousSeverStatistics)
+    public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
     {
         if (previousSeverStatistics is null)
         {

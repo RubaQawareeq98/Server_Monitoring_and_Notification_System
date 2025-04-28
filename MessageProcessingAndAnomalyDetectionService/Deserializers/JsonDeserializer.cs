@@ -5,8 +5,8 @@ namespace MessageProcessingAndAnomalyDetectionService.Deserializers;
 
 public class JsonDeserializer : IDeserializer
 {
-    public SeverStatisticsResponse Deserialize(string data)
+    public ServerStatisticsResponse Deserialize(string data)
     {
-        return JsonSerializer.Deserialize<SeverStatisticsResponse>(data) ?? throw new InvalidOperationException();
+        return JsonSerializer.Deserialize<ServerStatisticsResponse>(data) ?? throw new InvalidOperationException();
     }
 }
