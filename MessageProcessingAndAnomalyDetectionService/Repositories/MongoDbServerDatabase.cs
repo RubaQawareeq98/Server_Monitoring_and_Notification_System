@@ -7,9 +7,7 @@ public class MongoDbServerDatabase (MongoDbConfig mongoDbConfig)
 {
     public IMongoDatabase GetDatabase()
     {
-        
-        var connectionString = mongoDbConfig.ConnectionString;
-        var client = new MongoClient(connectionString);
+        var client = new MongoClient(mongoDbConfig.ConnectionString);
         var database = client.GetDatabase(mongoDbConfig.DatabaseName);
         
         return database;
