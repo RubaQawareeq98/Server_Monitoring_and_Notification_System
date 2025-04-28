@@ -20,9 +20,9 @@ internal abstract class Program
             service.AddServices(configuration);
             var provider = service.BuildServiceProvider();
         
-            var publisher = provider.GetService<IServerStatisticsPublisher>();
+            var publisher = provider.GetService<IServerStatisticsPublisher>() ?? throw new InvalidOperationException();
         
-            await publisher?.RunAsync();
+            await publisher.RunAsync();
         }
         catch (Exception e)
         {
