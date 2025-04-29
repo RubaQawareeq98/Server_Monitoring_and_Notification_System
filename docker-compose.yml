@@ -1,0 +1,10 @@
+version: '5.4'
+
+services:
+  serverstatisticscollectioncervice:
+    build:
+      context: .
+      dockerfile: ServerStatisticsCollectionService/Dockerfile
+    env_file:
+      - ServerStatisticsCollectionService/.env
+    

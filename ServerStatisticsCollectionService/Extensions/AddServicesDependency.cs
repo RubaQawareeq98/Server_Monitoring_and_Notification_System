@@ -15,9 +15,23 @@ public static class AddServicesDependency
 {
     public static void AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var serverStatisticsConfig = configuration.GetSection("ServerStatisticsConfig").Get<ServerStatisticsConfig>() ?? throw new InvalidCastException("ServerStatisticsConfig is missing");
-        var rabbitMqConfig = configuration.GetSection("RabbitMQConfig").Get<RabbitMqConfig>() ?? throw new InvalidCastException("RabbitMqConfig is missing");
-        
+        var serverStatisticsConfig = new ServerStatisticsConfig
+        {
+            ServerIdentifier = ""
+        };
+        Console.WriteLine("ServerStatisticsCollectionService is starting...");
+        configuration.Bind("ServerStatisticsConfig", serverStatisticsConfig);
+
+        var rabbitMqConfig = new RabbitMqConfig
+        {
+            HostName = null,
+            UserName = null,
+            Password = null,
+            Exchange = null,
+            QueueName = null
+        };
+        configuration.Bind("RabbitMQConfig", rabbitMqConfig);
+
         services.AddSingleton(serverStatisticsConfig);
         services.AddSingleton(rabbitMqConfig);
         services.AddSingleton<IServerStatisticsCollectorFactory, ServerStatisticsCollectorFactory>();

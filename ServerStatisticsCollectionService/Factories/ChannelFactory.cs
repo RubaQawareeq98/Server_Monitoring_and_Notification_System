@@ -15,7 +15,13 @@ public class ChannelFactory (RabbitMqConfig rabbitMqConfig) : IChannelFactory
             Password = rabbitMqConfig.Password
         };
         
+        
+        
         var connection = await factory.CreateConnectionAsync();
+        Console.WriteLine("Creating RabbitMQ Channel");
+        Console.WriteLine(rabbitMqConfig.HostName);
+        Console.WriteLine(rabbitMqConfig.UserName);
+        Console.WriteLine(rabbitMqConfig.Password);
         var channel = await connection.CreateChannelAsync();
         
         await channel.ExchangeDeclareAsync(

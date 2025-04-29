@@ -17,7 +17,11 @@ public class RabbitMqMessagePublisher(
 
     public async Task InitializeAsync()
     {
+        Console.WriteLine("Initializing RabbitMQ message publisher");
+        Console.WriteLine(rabbitMqConfig.Exchange);
         _channel = await channelFactory.GetChannel();
+        Console.WriteLine("Creating RabbitMQ Channel");
+        Console.WriteLine(rabbitMqConfig.HostName);
     }
     
     public async Task Publish(string message)

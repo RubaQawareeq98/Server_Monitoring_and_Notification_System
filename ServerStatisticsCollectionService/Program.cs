@@ -12,16 +12,21 @@ internal abstract class Program
         try
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
                 .Build();
+            
+            var tt = Environment.GetEnvironmentVariable("SERVER__IDENTIFIER");
+            Console.WriteLine($"ServerStatisticsCollectionService {tt}");
+            Console.WriteLine("Hello World!");
+            Console.WriteLine("asdfg");
 
             var service = new ServiceCollection();
             
             service.AddServices(configuration);
             var provider = service.BuildServiceProvider();
-        
+            
             var publisher = provider.GetService<IServerStatisticsPublisher>() ?? throw new InvalidOperationException();
-        
+            Console.WriteLine($"Publisher: ");
             await publisher.RunAsync();
         }
         catch (Exception e)
