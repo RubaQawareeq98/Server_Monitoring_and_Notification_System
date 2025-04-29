@@ -1,3 +1,4 @@
+using Domain.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Hubs.Interfaces;
 using MessageProcessingAndAnomalyDetectionService.Models;

@@ -1,6 +1,6 @@
-namespace MessageProcessingAndAnomalyDetectionService.Configurations;
+namespace Domain.Configurations;
 
 public class SignalRConfig
 {
-    public string SignalRUrl { get; set; }
+    public required string SignalRUrl { get; set; }
 }
