@@ -13,6 +13,7 @@ abstract class Program
     static async Task Main()
     {
         var configuration = new ConfigurationBuilder()
+            .AddEnvironmentVariables()
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 

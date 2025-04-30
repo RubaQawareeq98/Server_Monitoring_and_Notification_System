@@ -1,10 +1,78 @@
-version: '5.4'
-
 services:
-  serverstatisticscollectioncervice:
+  
+  
+#  mongo:
+#    image: mongo
+#    ports:
+#      - '27017:27017'
+#    volumes:
+#      - mongodb:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  
+  signalrhub:
+    image: signalrhub
     build:
       context: .
-      dockerfile: ServerStatisticsCollectionService/Dockerfile
+      dockerfile: SignalRAlertNotificationService/Dockerfile
+    ports:
+      - '5185:5185'
     env_file:
-      - ServerStatisticsCollectionService/.env
+      - env/signalRHub.env
+   
+#  messageprocessingandanomalydetectionservice:
+#    image: messageprocessingandanomalydetectionservice
+#    build:
+#      context: .
+#      dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
+#    depends_on:
+#      - rabbitmq
+#      - signalrhub
+#    env_file:
+#      - env/messageProcessingAndAnomalyDetectionService.env
+#        
+#  serverstatisticscollectioncervice:
+#    build:
+#      context: .
+#      dockerfile: ServerStatisticsCollectionService/Dockerfile
+#    depends_on:
+#      - rabbitmq
+#    env_file:
+#      - env/serverStatisticsCollection.env
+#  
+      
+  alertnotificationsconsumer:
+    build:
+      context: .
+      dockerfile: AlertNotificationsConsumer/Dockerfile
+    depends_on:
+      - signalrhub
+    env_file:
+      - env/signalRConfig.env
+    stdin_open: true
+    tty: true
     
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    env_file:
+      - env/mongoConfig.env
+
+  #  messageprocessingandanomalydetectionservice:
+  #    image: messageprocessingandanomalydetectionservice
+  #    build:
+  #      context: .
+  #      dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
+  #    depends_on:
+  #      - rabbitmq
+  #      - signalrhub
+  #    env_file:
+  #      - env/messageProcessingAndAnomalyDetectionService.env
+  #        

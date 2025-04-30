@@ -30,7 +30,7 @@ public class RabbitMqMessagePublisher(
         
         var basicProperties = new BasicProperties();
         var body = Encoding.UTF8.GetBytes(message);
-        
+        Console.WriteLine("Publishing message");
         await _channel.BasicPublishAsync(
             exchange: rabbitMqConfig.Exchange,   
             routingKey: _topic,   
