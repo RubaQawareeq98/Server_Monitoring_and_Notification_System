@@ -2,7 +2,7 @@ using MessageProcessingAndAnomalyDetectionService.Models;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interfaces;
 
-public interface IAnomalyDetector
+public interface IAlertDetector
 {
     Task<List<Alert>> GetAlerts(ServerStatisticsResponse serverStatistics);
 }

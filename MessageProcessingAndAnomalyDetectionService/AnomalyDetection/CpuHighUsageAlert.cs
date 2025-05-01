@@ -6,13 +6,13 @@ using Microsoft.Extensions.Options;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
-public class CpuHighUsageAlert (IOptions<AnomalyDetectionConfig> options) : IAnomalyChecker
+public class CpuHighUsageAlert (IOptions<AnomalyDetectionConfig> options) : IAlertChecker
 {
     private readonly AnomalyDetectionConfig _config = options.Value; 
 
-    public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
+    public async Task<bool> IsAlertDetected(ServerStatisticsResponse serverStatistics)
     {
-        return serverStatistics.CpuUsage > _config.CpuUsageThresholdPercentage;
+        return await Task.FromResult(serverStatistics.CpuUsage > _config.CpuUsageThresholdPercentage);
     }
 
     public Alert GetAlert()

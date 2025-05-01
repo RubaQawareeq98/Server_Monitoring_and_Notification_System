@@ -2,8 +2,8 @@ using MessageProcessingAndAnomalyDetectionService.Models;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection.Interfaces;
 
-public interface IAnomalyChecker
+public interface IAlertChecker
 {
-    bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics);
+    Task<bool> IsAlertDetected(ServerStatisticsResponse serverStatistics);
     Alert GetAlert();
 }

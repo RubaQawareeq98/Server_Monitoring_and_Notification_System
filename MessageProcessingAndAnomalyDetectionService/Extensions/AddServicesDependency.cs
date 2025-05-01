@@ -39,12 +39,12 @@ public static class AddServicesDependency
         });
         services.AddSingleton<IServerStatisticsRepository, ServerStatisticsRepository>();
 
-        services.AddSingleton<IAnomalyChecker, CpuAnomalyChecker>();
-        services.AddSingleton<IAnomalyChecker, MemoryAnomalyChecker>();
-        services.AddSingleton<IAnomalyChecker, MemoryHighUsageChecker>();
-        services.AddSingleton<IAnomalyChecker, CpuHighUsageAlert>();
+        services.AddSingleton<IAlertChecker, CpuAlertChecker>();
+        services.AddSingleton<IAlertChecker, MemoryAlertChecker>();
+        services.AddSingleton<IAlertChecker, MemoryHighUsageChecker>();
+        services.AddSingleton<IAlertChecker, CpuHighUsageAlert>();
 
-        services.AddSingleton<IAnomalyDetector, AnomalyDetector>();
+        services.AddSingleton<IAlertDetector, AlertDetector>();
         services.AddSingleton<IProcessingAndAnomalyService, ProcessingAndAnomalyService>();
     }
 }

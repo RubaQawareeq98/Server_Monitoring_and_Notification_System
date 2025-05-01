@@ -12,7 +12,7 @@ public class ProcessingAndAnomalyService (
     IRabbitMqMessageConsumer rabbitMqMessageConsumer,
     IDeserializer deserializer,
     ILogger<ProcessingAndAnomalyService> logger,
-    IAnomalyDetector anomalyDetector,
+    IAlertDetector alertDetector,
     IServerStatisticsRepository repository,
     IServerStatisticsHub statisticsHub) : IProcessingAndAnomalyService
 {
@@ -30,7 +30,7 @@ public class ProcessingAndAnomalyService (
 
                 var serverStatistics = deserializer.Deserialize(msg);
                 serverStatistics.ServerIdentifier = ea.RoutingKey;
-                var alerts = await anomalyDetector.GetAlerts(serverStatistics);
+                var alerts = await alertDetector.GetAlerts(serverStatistics);
                 await statisticsHub.SendAlertAsync(alerts);
                 await repository.InsertServerStatisticsAsync(serverStatistics);
             });

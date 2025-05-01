@@ -6,14 +6,14 @@ using Microsoft.Extensions.Options;
 
 namespace MessageProcessingAndAnomalyDetectionService.AnomalyDetection;
 
-public class MemoryHighUsageChecker (IOptions<AnomalyDetectionConfig> options): IAnomalyChecker
+public class MemoryHighUsageChecker (IOptions<AnomalyDetectionConfig> options): IAlertChecker
 {
     private readonly AnomalyDetectionConfig _config = options.Value; 
 
-    public bool IsAnomalyDetected(ServerStatisticsResponse serverStatistics, ServerStatisticsResponse? previousSeverStatistics)
+    public async Task<bool> IsAlertDetected(ServerStatisticsResponse serverStatistics)
     {
-        return serverStatistics.MemoryUsage / (serverStatistics.MemoryUsage + serverStatistics.AvailableMemory) >
-               _config.MemoryUsageThresholdPercentage;
+        return await Task.FromResult(serverStatistics.MemoryUsage / (serverStatistics.MemoryUsage + serverStatistics.AvailableMemory) >
+                                     _config.MemoryUsageThresholdPercentage);
     }
 
     public Alert GetAlert()
