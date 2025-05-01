@@ -1,5 +1,4 @@
 using Domain.Configurations;
-using MessageProcessingAndAnomalyDetectionService.Configurations;
 using MessageProcessingAndAnomalyDetectionService.Hubs.Interfaces;
 using MessageProcessingAndAnomalyDetectionService.Models;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -27,7 +26,7 @@ public class ServerStatisticsHub (IOptions<SignalRConfig> options, ILogger<Serve
         
         foreach (var a in alerts)
         {
-            await connection.InvokeCoreAsync("SendAlert", [nameof(a.AlertType), a.Message]);
+            await connection.InvokeCoreAsync("SendAlert", [a.AlertType.ToString(), a.Message]);
         }
         await connection.DisposeAsync();
     }
