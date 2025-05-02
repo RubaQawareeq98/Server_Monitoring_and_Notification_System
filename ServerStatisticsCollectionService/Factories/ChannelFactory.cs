@@ -23,6 +23,18 @@ public class ChannelFactory (RabbitMqConfig rabbitMqConfig) : IChannelFactory
             type: ExchangeType.Topic,
             durable: true
         );
+        await channel.QueueDeclareAsync(
+            queue: rabbitMqConfig.QueueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false
+        );
+
+        await channel.QueueBindAsync(
+            queue: rabbitMqConfig.QueueName,
+            exchange: rabbitMqConfig.Exchange,
+            routingKey: rabbitMqConfig.RoutingKey
+        );
         
         return channel;
     }
