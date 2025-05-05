@@ -12,6 +12,7 @@ internal abstract class Program
         try
         {
             var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
             

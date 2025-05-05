@@ -15,7 +15,6 @@ services:
       - "15672:15672"
   
   signalrhub:
-    image: signalrhub
     build:
       context: .
       dockerfile: SignalRAlertNotificationService/Dockerfile
@@ -25,7 +24,6 @@ services:
       - env/signalRHub.env
    
   messageprocessingandanomalydetectionservice:
-    image: messageprocessingandanomalydetectionservice
     build:
       context: .
       dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
@@ -59,23 +57,3 @@ services:
     
 volumes:
   mongodb:
-  
-#  mongodb:
-#    image: mongo
-#    container_name: mongodb
-#    ports:
-#      - "27017:27017"
-#    env_file:
-#      - env/mongoConfig.env
-
-  #  messageprocessingandanomalydetectionservice:
-  #    image: messageprocessingandanomalydetectionservice
-  #    build:
-  #      context: .
-  #      dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
-  #    depends_on:
-  #      - rabbitmq
-  #      - signalrhub
-  #    env_file:
-  #      - env/messageProcessingAndAnomalyDetectionService.env
-  #        
