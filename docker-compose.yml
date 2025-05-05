@@ -1,16 +1,15 @@
 services:
   
   
-#  mongo:
-#    image: mongo
-#    ports:
-#      - '27017:27017'
-#    volumes:
-#      - mongodb:/data/db
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -25,26 +24,26 @@ services:
     env_file:
       - env/signalRHub.env
    
-#  messageprocessingandanomalydetectionservice:
-#    image: messageprocessingandanomalydetectionservice
-#    build:
-#      context: .
-#      dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
-#    depends_on:
-#      - rabbitmq
-#      - signalrhub
-#    env_file:
-#      - env/messageProcessingAndAnomalyDetectionService.env
-#        
-#  serverstatisticscollectioncervice:
-#    build:
-#      context: .
-#      dockerfile: ServerStatisticsCollectionService/Dockerfile
-#    depends_on:
-#      - rabbitmq
-#    env_file:
-#      - env/serverStatisticsCollection.env
-#  
+  messageprocessingandanomalydetectionservice:
+    image: messageprocessingandanomalydetectionservice
+    build:
+      context: .
+      dockerfile: MessageProcessingAndAnomalyDetectionService/Dockerfile
+    depends_on:
+      - rabbitmq
+      - signalrhub
+    env_file:
+      - env/messageProcessingAndAnomalyDetectionService.env
+
+  serverstatisticscollectioncervice:
+    build:
+      context: .
+      dockerfile: ServerStatisticsCollectionService/Dockerfile
+    depends_on:
+      - rabbitmq
+    env_file:
+      - env/serverStatisticsCollection.env
+
       
   alertnotificationsconsumer:
     build:
@@ -57,13 +56,17 @@ services:
     stdin_open: true
     tty: true
     
+    
+volumes:
   mongodb:
-    image: mongo
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    env_file:
-      - env/mongoConfig.env
+  
+#  mongodb:
+#    image: mongo
+#    container_name: mongodb
+#    ports:
+#      - "27017:27017"
+#    env_file:
+#      - env/mongoConfig.env
 
   #  messageprocessingandanomalydetectionservice:
   #    image: messageprocessingandanomalydetectionservice
